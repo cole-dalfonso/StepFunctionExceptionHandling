@@ -1,62 +1,39 @@
-# Project Title
+# Step Function Exception Handling
 
-Simple overview of use/purpose.
+All tests are done with a test exectuion of the processing step function.
 
-## Description
+## Test 1
+### Exception is thrown in processing-lambda
+### Execution 
 
-An in-depth paragraph about your project and overview of use.
+{
+  "exception": "processing"
+}
 
-## Getting Started
+### Print in exception-handling-lambda
 
-### Dependencies
+`{'Error': 'Exception', 'Cause': '{"errorMessage":"{\'statusCode\': 500, \'body\': \'exception in the processing lambda\', \'initialEvent\': {\'exception\': \'processing\'}}","errorType":"Exception","requestId":"b6926d73-9bc2-4f5b-a198-c075c1039b3b","stackTrace":["  File \\"/var/task/lambda_function.py\\", line 16, in lambda_handler\\n    raise Exception({\\n"]}'}`
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
 
-### Installing
+## Test 2
+### Exception is thrown in inner-processing-lambda
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+{
+  "exception": "inner_processing"
+}
 
-### Executing program
+### Print in exception-handling-lambda
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+`{'Error': 'Exception', 'Cause': '{"errorMessage":"{\'statusCode\': 500, \'body\': \\"\'exception\'\\", \'initialEvent\': {\'exception\': \'inner_processing\'}}","errorType":"Exception","requestId":"0c89effd-6f4e-4c55-87ec-b79297ea332a","stackTrace":["  File \\"/var/task/lambda_function.py\\", line 16, in lambda_handler\\n    raise Exception({\\n"]}'}`
 
-## Help
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+## Test 3
+### Exception is not thrown anywhere
 
-## Authors
+{
+  "exception": "none"
+}
 
-Contributors names and contact info
+#### Print in exception-handling-lambda
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
-
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+(N/A because there was no exception)
